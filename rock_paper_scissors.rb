@@ -23,7 +23,7 @@ loop do
 
   computer_choice = CHOICES.keys.sample
 
-  puts "You picked #{user_choice}, and computer picked #{computer_choice}"
+  puts "You picked #{CHOICES[user_choice]}, and computer picked #{CHOICES[computer_choice]}."
 
   if user_choice == computer_choice
     puts "Its a draw!!!"

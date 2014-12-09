@@ -14,10 +14,35 @@ CHOICES = {'p' => 'Paper', 'r' => 'Rock', 's' => 'Scissors'}
 puts 'Play Rock, Paper, Scissors!'
 
 
+def get_winner(player_move, comp_move)
+  if (player_move == comp_move)
+    return nil
+  end
+  case player_move
+    when 'p'
+      return comp_move == 'r'
+    when 'r'
+      return comp_move == 's'
+    when 's'
+      return comp_move == 'p'
+  end
+end
+
+def get_message(winner_move)
+  case winner_move
+    when 'r'
+      return 'Rock smashes scissors.'
+    when 's'
+      return 'Scissors cut paper.'
+    when 'p'
+      return 'Paper covers rock.'
+  end
+end
+
 loop do
 
   begin
-    puts 'Make your selection: Rock (r), Paper (p), or Scissors (s)'
+    puts 'Make your selection: Rock (r), Paper (p), or Scissors (s).'
     user_choice = gets.chomp.downcase
   end until CHOICES.keys.include?(user_choice)
 
@@ -25,12 +50,13 @@ loop do
 
   puts "You picked #{CHOICES[user_choice]}, and computer picked #{CHOICES[computer_choice]}."
 
-  if user_choice == computer_choice
-    puts "Its a draw!!!"
-  elsif (user_choice == 'p' && computer_choice =='r') || (user_choice == 'r' && computer_choice == 's' ) || ( user_choice == 's' && computer_choice == 'p')
-    puts 'You won!!!'
+  result = get_winner(user_choice, computer_choice)
+
+  if result == nil
+    puts "It's a draw!!!"
   else
-    puts 'Computer won!!!'
+    puts get_message(result ? user_choice : computer_choice)
+    puts result ? "You win!!!" : "Computer Wins!!!"
   end
 
   puts 'Play Again? (Y/N)'
@@ -39,5 +65,5 @@ loop do
 
 end
 
-puts 'Thanks for playing!'
+puts 'Thanks for playing.'
 
